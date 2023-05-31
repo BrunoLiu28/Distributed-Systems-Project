@@ -1,0 +1,52 @@
+syntax = "proto3";
+message message_t
+ {
+        enum Opcode {
+                OP_BAD     	= 0;
+                OP_SIZE    	= 10;
+                OP_HEIGHT  	= 20;
+                OP_DEL     	= 30;
+                OP_GET     	= 40;
+                OP_PUT     	= 50;
+                OP_GETKEYS	= 60;
+                OP_GETVALUES	= 70;
+                OP_VERIFY       = 80;
+                OP_ERROR   	= 99;
+        }
+        Opcode opcode = 1;
+
+        enum C_type {
+                CT_BAD    	= 0;
+                CT_KEY    	= 10;
+                CT_VALUE  	= 20;
+                CT_ENTRY  	= 30;
+                CT_KEYS   	= 40;
+                CT_VALUES  	= 50;
+                CT_RESULT 	= 60;
+                CT_NONE   	= 70;
+        }
+        C_type c_type = 2;
+
+        bytes data = 3;
+        
+        entry_t entry_type = 4;
+
+        int32 tree_size_height = 6;
+
+        repeated string keys = 7;
+
+        repeated string values = 8;
+
+        int32 op_n = 9;
+};
+
+message entry_t {
+        string key = 1;
+        data_t data = 2;
+}
+
+
+message data_t {                //nao sei se é preciso isto, exemplo da aula
+        sint32 datasize = 1;
+        string data = 2;
+}
